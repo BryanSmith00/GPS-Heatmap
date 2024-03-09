@@ -20,9 +20,29 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <input type="file" id="files" accept=".gpx, .kml, .json" multiple="true" />
+    <div class="header-section">
+      <div class="header-left">
+        <h1>GPS Heatmap Generator</h1>
+        <h4>https://github.com/BryanSmith00</h4>
+        <h4>Using: Leaflet & Leaflet.heat</h4>
+      </div>
 
-    <div id="map"></div>
+      <div class="header-center">
+        <p>Upload your GPS files (.GPX, .KML)</p>
+        <input
+          type="file"
+          id="files"
+          accept=".gpx, .kml, .json"
+          multiple="true"
+        />
+      </div>
+
+      <div class="header-right"></div>
+    </div>
+
+    <div class="content-section">
+      <div id="map"></div>
+    </div>
 
     <script src="./heat.js"></script>
   </body>

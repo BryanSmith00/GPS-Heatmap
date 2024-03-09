@@ -7,7 +7,11 @@ function readFiles(files, data) {
       console.log(data.getTracks());
       console.log(data.getAllData());
 
-      var heat = L.heatLayer(data.getAllData(), {radius: 10, gradient: {0.4: 'blue', 0.65: 'lime', 0.85: 'green', 0.95: 'red'}}).addTo(map);
+      // Takes all the coordinate data and generates a heatmap layer
+      var heat = L.heatLayer(data.getAllData(), {
+        radius: 10,
+        gradient: { 0.4: "blue", 0.65: "lime", 0.85: "green", 0.95: "red" },
+      }).addTo(map);
 
       return;
     }
