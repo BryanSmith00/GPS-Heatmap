@@ -2,6 +2,8 @@ html,
 body {
   margin: 0;
   height: 100%;
+  background-color: #212121;
+  color: white;
 }
 
 body {
@@ -58,9 +60,10 @@ a:hover {
 }
 
 a:visited {
-  color: rgb(16, 68, 28);
+  color: rgb(189, 189, 189);
 }
 
 #map {
   height: 100%;
+  border-radius: 1rem;
 }

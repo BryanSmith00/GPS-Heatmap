@@ -10,7 +10,13 @@ function readFiles(files, data) {
       // Takes all the coordinate data and generates a heatmap layer
       var heat = L.heatLayer(data.getAllData(), {
         radius: 10,
-        gradient: { 0.4: "blue", 0.65: "lime", 0.85: "green", 0.98: "red" },
+        gradient: {
+          0.4: "blue",
+          0.6: "cyan",
+          0.7: "lime",
+          0.8: "yellow",
+          0.95: "red",
+        },
       }).addTo(map);
 
       return;
@@ -23,12 +29,17 @@ function readFiles(files, data) {
       lat = filedata.match(/lat="[^"]+/g);
       lon = filedata.match(/lon="[^"]+/g);
 
-      lat = lat.map((e) => parseFloat(e.substring(e.indexOf('"') + 1)));
-      lon = lon.map((e) => parseFloat(e.substring(e.indexOf('"') + 1)));
-      //zips the lat and lon arrays together into a single list
-      latlon = lat.map((e, i) => [e, lon[i]]);
+      if (lat != null && lon != null) {
+        lat = lat.map((e) => parseFloat(e.substring(e.indexOf('"') + 1)));
+        lon = lon.map((e) => parseFloat(e.substring(e.indexOf('"') + 1)));
+        //zips the lat and lon arrays together into a single list
+        latlon = lat.map((e, i) => [e, lon[i]]);
 
-      data.addTrack(latlon);
+        console.log(lat.length);
+        console.log(lon.length);
+
+        data.addTrack(latlon);
+      }
 
       readFile(index + 1, data);
     };
@@ -57,7 +68,7 @@ data.getAllData = function () {
   return e;
 };
 
-var map = L.map("map").setView([0, 0], 2);
+var map = L.map("map").setView([30, -5], 3);
 
 var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
