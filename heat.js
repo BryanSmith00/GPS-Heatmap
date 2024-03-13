@@ -4,8 +4,6 @@ function readFiles(files, data) {
   function readFile(index, data) {
     if (index >= files.length) {
       //this is where we call our next function
-      console.log(data.getTracks());
-      console.log(data.getAllData());
 
       // Takes all the coordinate data and generates a heatmap layer
       var heat = L.heatLayer(data.getAllData(), {
@@ -18,6 +16,8 @@ function readFiles(files, data) {
           0.95: "red",
         },
       }).addTo(map);
+
+      map.fitBounds(L.latLngBounds(data.getAllData()));
 
       return;
     }
@@ -34,9 +34,6 @@ function readFiles(files, data) {
         lon = lon.map((e) => parseFloat(e.substring(e.indexOf('"') + 1)));
         //zips the lat and lon arrays together into a single list
         latlon = lat.map((e, i) => [e, lon[i]]);
-
-        console.log(lat.length);
-        console.log(lon.length);
 
         data.addTrack(latlon);
       }
@@ -68,11 +65,18 @@ data.getAllData = function () {
   return e;
 };
 
-var map = L.map("map").setView([30, -5], 3);
+var map = L.map("map", {
+  maxBounds: [
+    [100, -168],
+    [-100, 168],
+  ],
+  minZoom: 3,
+}).setView([30, -5], 3);
 
 var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+  noWrap: true,
 }).addTo(map);
 
 let input = document.getElementById("files");

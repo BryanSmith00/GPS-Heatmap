@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>GPS Heatmap</title>
+    <link rel="icon" href="favicon.ico" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -29,7 +30,10 @@
           >
         </h4>
         <h4>
-          Using: <a href="https://leafletjs.com/" target="_blank">Leaflet</a> & <a href="https://github.com/Leaflet/Leaflet.heat" target="_blank">Leaflet.heat</a>
+          Using: <a href="https://leafletjs.com/" target="_blank">Leaflet</a> &
+          <a href="https://github.com/Leaflet/Leaflet.heat" target="_blank"
+            >Leaflet.heat</a
+          >
         </h4>
       </div>
 
@@ -40,7 +44,10 @@
           id="files"
           accept=".gpx, .kml, .json"
           multiple="true"
+          autocomplete="off"
         />
+
+        <button type="button">Generate sample data</button>
       </div>
 
       <div class="header-right"></div>

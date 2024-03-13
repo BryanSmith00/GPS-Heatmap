@@ -2,8 +2,15 @@ html,
 body {
   margin: 0;
   height: 100%;
-  background-color: #212121;
+
   color: white;
+  background: rgb(21, 21, 21);
+  background: radial-gradient(
+    circle,
+    rgba(21, 21, 21, 1) 0%,
+    rgba(46, 46, 54, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 body {
@@ -61,6 +68,19 @@ a:hover {
 
 a:visited {
   color: rgb(189, 189, 189);
+}
+
+input {
+  display: flex;
+  justify-content: center;
+  max-width: 4.5rem;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+p {
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 #map {
