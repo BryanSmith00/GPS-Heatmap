@@ -47,7 +47,9 @@
           autocomplete="off"
         />
 
-        <button type="button">Generate sample data</button>
+        <button type="button" id="resetBtn" onclick="resetLayer()">Reset</button>
+
+        <button type="button" onclick="sampleHeatMap(getRandomSample())">Generate sample data</button>
       </div>
 
       <div class="header-right"></div>
@@ -57,6 +59,7 @@
       <div id="map"></div>
     </div>
 
+    <script src="./sampledata.js"></script>
     <script src="./heat.js"></script>
   </body>
 </html>

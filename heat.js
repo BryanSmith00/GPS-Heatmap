@@ -1,23 +1,50 @@
+function resetLayer() {
+  console.log("before" + input.value);
+  input.value = null;
+  console.log("after" + input.value);
+}
+
+function getHeatMap(data) {
+  // Takes all the coordinate data and generates a heatmap layer
+  let heat = L.heatLayer(data.getAllData(), {
+    radius: 10,
+    gradient: {
+      0.4: "blue",
+      0.6: "cyan",
+      0.7: "lime",
+      0.8: "yellow",
+      0.95: "red",
+    },
+  });
+  heat.addTo(map);
+  
+  map.fitBounds(L.latLngBounds(data.getAllData()));
+}
+
+function sampleHeatMap(data) {
+  // Takes all the coordinate data and generates a heatmap layer
+  let heat = L.heatLayer(data, {
+    radius: 10,
+    gradient: {
+      0.4: "blue",
+      0.6: "cyan",
+      0.7: "lime",
+      0.8: "yellow",
+      0.95: "red",
+    },
+  });
+  heat.addTo(map);
+  
+  map.fitBounds(L.latLngBounds(data));
+}
+
 function readFiles(files, data) {
   var reader = new FileReader();
 
   function readFile(index, data) {
     if (index >= files.length) {
       //this is where we call our next function
-
-      // Takes all the coordinate data and generates a heatmap layer
-      var heat = L.heatLayer(data.getAllData(), {
-        radius: 10,
-        gradient: {
-          0.4: "blue",
-          0.6: "cyan",
-          0.7: "lime",
-          0.8: "yellow",
-          0.95: "red",
-        },
-      }).addTo(map);
-
-      map.fitBounds(L.latLngBounds(data.getAllData()));
+      getHeatMap(data);
 
       return;
     }
@@ -64,6 +91,9 @@ data.getAllData = function () {
   }
   return e;
 };
+data.reset = function () {
+  data.tracks = [];
+};
 
 var map = L.map("map", {
   maxBounds: [
@@ -78,6 +108,19 @@ var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
   noWrap: true,
 }).addTo(map);
+
+// let randomsample = getRandomSample();
+
+// var heat = L.heatLayer(randomsample, {
+//   radius: 10,
+//   gradient: {
+//     0.4: "blue",
+//     0.6: "cyan",
+//     0.7: "lime",
+//     0.8: "yellow",
+//     0.95: "red",
+//   },
+// }).addTo(map);
 
 let input = document.getElementById("files");
 
