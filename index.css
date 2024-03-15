@@ -73,7 +73,7 @@ a:visited {
 input {
   display: flex;
   justify-content: center;
-  max-width: 4.5rem;
+  max-width: 4.4rem;
   margin-top: 1%;
   margin-bottom: 1%;
 }
@@ -86,4 +86,9 @@ p {
 #map {
   height: 100%;
   border-radius: 1rem;
+}
+
+button {
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
 }
