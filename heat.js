@@ -1,12 +1,11 @@
 function resetLayer() {
-  console.log("before" + input.value);
   input.value = null;
-  console.log("after" + input.value);
+  heat.setLatLngs([]);
 }
 
 function getHeatMap(data) {
-  // Takes all the coordinate data and generates a heatmap layer
-  let heat = L.heatLayer(data.getAllData(), {
+  heat.setLatLngs(data);
+  heat.setOptions({
     radius: 10,
     gradient: {
       0.4: "blue",
@@ -17,24 +16,7 @@ function getHeatMap(data) {
     },
   });
   heat.addTo(map);
-  
-  map.fitBounds(L.latLngBounds(data.getAllData()));
-}
 
-function sampleHeatMap(data) {
-  // Takes all the coordinate data and generates a heatmap layer
-  let heat = L.heatLayer(data, {
-    radius: 10,
-    gradient: {
-      0.4: "blue",
-      0.6: "cyan",
-      0.7: "lime",
-      0.8: "yellow",
-      0.95: "red",
-    },
-  });
-  heat.addTo(map);
-  
   map.fitBounds(L.latLngBounds(data));
 }
 
@@ -44,7 +26,7 @@ function readFiles(files, data) {
   function readFile(index, data) {
     if (index >= files.length) {
       //this is where we call our next function
-      getHeatMap(data);
+      getHeatMap(data.getAllData());
 
       return;
     }
@@ -103,24 +85,13 @@ var map = L.map("map", {
   minZoom: 3,
 }).setView([30, -5], 3);
 
+let heat = L.heatLayer();
+
 var tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
   noWrap: true,
 }).addTo(map);
-
-// let randomsample = getRandomSample();
-
-// var heat = L.heatLayer(randomsample, {
-//   radius: 10,
-//   gradient: {
-//     0.4: "blue",
-//     0.6: "cyan",
-//     0.7: "lime",
-//     0.8: "yellow",
-//     0.95: "red",
-//   },
-// }).addTo(map);
 
 let input = document.getElementById("files");
 
